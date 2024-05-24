@@ -26,10 +26,10 @@
 <body>
 
 <center>
-<script src="https://cdn.jsdelivr.net/npm/p2p-media-loader-core@latest/build/p2p-media-loader-core.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/p2p-media-loader-hlsjs@latest/build/p2p-media-loader-hlsjs.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/clappr/latest/clappr.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/clappr.level-selector/latest/level-selector.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p2p-media-loader-core@latest/build/p2p-media-loader-core.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p2p-media-loader-hlsjs@latest/build/p2p-media-loader-hlsjs.min.js"></script>
+<div id="oper"></div>
+<div id="vid"></div>
 <script>
 var engine = new p2pml.hlsjs.Engine();
 var player = new Clappr.Player({
@@ -40,6 +40,8 @@ var player = new Clappr.Player({
 height: "360",
  width: "100%",
 preload: 'auto',
+plugins: {"core": [LevelSelector]}, 
+ parentId: "#vid"});
   playback: {
     hlsjsConfig: {
       liveSyncDurationCount: 7,
