@@ -26,20 +26,33 @@
 <body>
 
 <center>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/clappr/latest/clappr.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/clappr.level-selector/latest/level-selector.min.js"></script>
-<div id="oper"></div>
-<div id="vid"></div>
-<script>
- player = new Clappr.Player({
- source: "http://31.42.187.37:25461/live/watchpad13155/1234/87.m3u8",
- mimeType: "application/x-mpegURL",
- autoPlay: true, 
- height: "360",
- width: "100%",
- preload: 'auto',
- plugins: {"core": [LevelSelector]}, 
- parentId: "#vid"});
+    <script src="https://cdn.jsdelivr.net/npm/p2p-media-loader-core@latest/build/p2p-media-loader-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p2p-media-loader-hlsjs@latest/build/p2p-media-loader-hlsjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clappr@latest"></script>
+    <div id="player"></div>
+    <script>
+        if (p2pml.hlsjs.Engine.isSupported()) {
+            var engine = new p2pml.hlsjs.Engine();
+
+            var player = new Clappr.Player({
+                parentId: "#player",
+                source: "http://31.42.187.37:25461/live/watchpad13155/1234/87.m3u8",
+                autoPlay: true,
+              height: "360",
+              width: "100%",
+              preload: 'auto',
+                playback: {
+                    hlsjsConfig: {
+                        liveSyncDurationCount: 7,
+                        loader: engine.createLoaderClass()
+                    }
+                }
+            });
+
+            p2pml.hlsjs.initClapprPlayer(player);
+        } else {
+            document.write("Not supported :(");
+        }
 </script>
 <br />
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=6631b8f57464820019156342&product=sop' async='async'></script>
